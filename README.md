@@ -41,3 +41,5 @@ The login and settings are stored persistent in the volume.
 
 ## Backup configuration
 The configuration and operation of backup and restore can be done in the IDrive GUI. Help can be found on the [IDrive FAQs](https://www.idrive.com/faq_linux#linuxWeb2) for Linux.
+
+Be advised, that the containers timezone is UTC and so are the backup times and the log entries. Maybe this will be altered and made configurable in a furure change.

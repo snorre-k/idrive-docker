@@ -42,7 +42,7 @@ jobs:
         with:
           # relative path to the place where source code with Dockerfile is located
           context: .
-          platform: linux/amd64,linux/arm64
+          platforms: linux/amd64,linux/arm64
           # Note: tags has to be all lower-case
           tags: |
             snorre0815/idrive-docker:latest 

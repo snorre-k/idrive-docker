@@ -1,6 +1,8 @@
 # idrive-docker
 Run IDrive Linux Client in a docker container
 
+GitHub: https://github.com/snorre-k/idrive-docker
+
 ## Requirements
 - Docker and/or docker-compose installed
 - IDrive account

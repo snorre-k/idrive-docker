@@ -11,7 +11,7 @@ docker build -t idrive-docker:latest .
 ```
 Image is tagged `idrive-docker:latest`. The image is also available on Dockerhub and GHCR
 - `snorre0815/idrive-docker:latest`
-- `ghcr.io/...`
+- `ghcr.io/snorre-k/idrive-docker:latest`
 
 ## Run container with docker
 ```shell

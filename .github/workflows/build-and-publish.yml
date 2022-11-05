@@ -42,12 +42,20 @@ jobs:
         with:
           # relative path to the place where source code with Dockerfile is located
           context: .
+          platform: linux/amd64,linux/arm64
           # Note: tags has to be all lower-case
           tags: |
             snorre0815/idrive-docker:latest 
             ghcr.io/snorre-k/idrive-docker:latest
           # build on feature branches, push only on main branch
           push: ${{ github.ref == 'refs/heads/main' }}
+
+      - name: Update dockerhub repo description
+        uses: peter-evans/dockerhub-description@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          repository: snorre0815/idrive-docker
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}

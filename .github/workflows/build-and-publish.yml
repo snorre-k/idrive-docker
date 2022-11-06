@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths:
       - 'idrive/build'
-  schedult:
+  schedule:
     - cron: '53 12 * * *'
 
 jobs:

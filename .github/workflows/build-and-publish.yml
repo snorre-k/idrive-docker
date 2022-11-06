@@ -6,7 +6,7 @@ on:
     paths:
       - 'idrive/build'
   schedule:
-    - cron: '53 12 * * *'
+    - cron: '03 09 * * *'
 
 jobs:
   build-and-push-docker-image:

@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'idrive/build'
+      - 'idrive/build/**'
   schedule:
     - cron: '12 9 * * *'
   workflow_dispatch:

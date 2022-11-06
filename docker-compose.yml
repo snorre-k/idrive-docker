@@ -2,7 +2,7 @@ version: "2"
 
 services:
   idrive:
-    build: .
+    build: ./idrive/build/
     image: idrive-docker:latest
     container_name: idrive
     volumes:

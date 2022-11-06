@@ -1,27 +1,31 @@
 name: Build and Publish
 
 on:
-  # run it on push to the default repository branch
   push:
     branches: [main]
-    paths-ignore:
-      - '**.md'
-      - 'docker-compose.yml'
-      - '.github/workflows/**'
+    paths:
+      - 'idrive/build'
+  schedult:
+    - cron: '53 12 * * *'
 
 jobs:
-  # define job to build and publish docker image
   build-and-push-docker-image:
     name: Build Docker image and push to repositories
-    # run only when code is compiling and tests are passing
     runs-on: ubuntu-latest
 
-    # steps to perform in job
     steps:
+
+      - name: Check for new base image
+        if: github.event_name != 'push'
+        id: check
+        uses: twiddler/is-my-docker-parent-image-out-of-date@v1
+        with:
+          parent-image: ubuntu:22.04
+          my-image: snorre0815/idrive-docker:latest
+
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # setup Docker buld action
       - name: Set up Docker Buildx
         id: buildx
         uses: docker/setup-buildx-action@v2
@@ -40,24 +44,17 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Build image and push to Docker Hub and GitHub Container Registry
+        if: github.event_name == 'push' || steps.check.outputs.out-of-date == 'true'
         uses: docker/build-push-action@v3
         with:
           # relative path to the place where source code with Dockerfile is located
-          context: .
-          platforms: linux/amd64
+          context: idrive/build
           # Note: tags has to be all lower-case
           tags: |
             snorre0815/idrive-docker:latest 
             ghcr.io/snorre-k/idrive-docker:latest
           # build on feature branches, push only on main branch
           push: ${{ github.ref == 'refs/heads/main' }}
-
-      - name: Update dockerhub repo description
-        uses: peter-evans/dockerhub-description@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-          repository: snorre0815/idrive-docker
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}

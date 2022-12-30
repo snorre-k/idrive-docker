@@ -1,7 +1,7 @@
 FROM ubuntu:22.04
 
 # Install packages
-RUN apt-get update && apt-get -y install \
+RUN apt-get update && apt-get -y upgrade && apt-get -y install \
       vim \
       unzip \
       curl \

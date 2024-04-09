@@ -6,7 +6,7 @@ services:
     image: idrive-docker:latest
     container_name: idrive
     volumes:
-      - idrive:/IDriveForLinux/idriveIt
+      - idrive:/opt/IDriveForLinux/idriveIt
       - /path/to/backup:/source/1:ro
     restart: unless-stopped
 

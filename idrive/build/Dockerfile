@@ -17,8 +17,8 @@ RUN bash -c 'export TERM=xterm; echo -ne "\nn\n" | /IDriveForLinux/scripts/accou
     ln -s /opt/IDriveForLinux/bin/idrive /etc/idrivecron
 
 # Touch IDrive crontab on volume & link it to /etc
-RUN touch /IDriveForLinux/idriveIt/idrivecrontab.json && \
-    ln -s /IDriveForLinux/idriveIt/idrivecrontab.json /etc/idrivecrontab.json
+RUN touch /opt/IDriveForLinux/idriveIt/idrivecrontab.json && \
+    ln -s /opt/IDriveForLinux/idriveIt/idrivecrontab.json /etc/idrivecrontab.json
 
 # Copy start script
 COPY start.sh /

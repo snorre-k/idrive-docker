@@ -13,7 +13,7 @@ exit_handler() {
 trap 'kill ${!}; exit_handler' EXIT
 
 # Start IDrive CRON in background
-/etc/idrivecron --cron 1>/dev/null 2>/dev/null &
+perl /etc/idrivecron.pl 1>/dev/null 2>/dev/null &
 pid="$!"
 
 # Persist till Signal

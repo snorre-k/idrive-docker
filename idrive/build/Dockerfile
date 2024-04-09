@@ -5,24 +5,16 @@ RUN apt-get update && apt-get -y install \
       vim \
       unzip \
       curl \
-      libfile-spec-native-perl \
-      build-essential \
-      sqlite3 \
-      perl-doc \
-      libdbi-perl \
-      libdbd-sqlite3-perl && \
+      python3 \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-RUN cpan install common::sense Linux::Inotify2
 
-# Install IDrive
-RUN curl -O https://www.idrivedownloads.com/downloads/linux/download-for-linux/LinuxScripts/IDriveForLinux.zip && \
-    unzip IDriveForLinux.zip && \
-    rm IDriveForLinux.zip && \
-    chmod +x /IDriveForLinux/scripts/*.pl && \
-    ln -s /IDriveForLinux/scripts/cron.pl /etc/idrivecron.pl
+# Get IDrive
+RUN curl -O https://www.idrivedownloads.com/downloads/linux/download-for-linux/linux-bin/idriveforlinux.bin && \
+    chmod +x idriveforlinux.bin
 
-# Get IDrive initial binaries
-RUN bash -c 'export TERM=xterm; echo -ne "\nn\n" | /IDriveForLinux/scripts/account_setting.pl; exit 0'
+# Setup IDrive
+RUN bash -c 'export TERM=xterm; echo -ne "\nn\n" | /IDriveForLinux/scripts/account_setting.pl; exit 0' && \
+    ln -s /opt/IDriveForLinux/bin/idrive /etc/idrivecron
 
 # Touch IDrive crontab on volume & link it to /etc
 RUN touch /IDriveForLinux/idriveIt/idrivecrontab.json && \
@@ -32,8 +24,8 @@ RUN touch /IDriveForLinux/idriveIt/idrivecrontab.json && \
 COPY start.sh /
 RUN chmod +x /start.sh
 
-WORKDIR /IDriveForLinux/scripts
-VOLUME /IDriveForLinux/idriveIt
+WORKDIR /opt/IDriveForLinux/bin
+VOLUME /opt/IDriveForLinux/idriveIt
 
 # Run the start script
 CMD ["/start.sh"]

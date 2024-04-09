@@ -5,15 +5,15 @@ RUN apt-get update && apt-get -y install \
       vim \
       unzip \
       curl \
+      cron \
       python3 && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Get IDrive
+# Get & Setup IDrive
 RUN curl -O https://www.idrivedownloads.com/downloads/linux/download-for-linux/linux-bin/idriveforlinux.bin && \
-    chmod +x idriveforlinux.bin
-
-# Setup IDrive
-RUN bash -c 'export TERM=xterm; echo -ne "\nn\n" | /IDriveForLinux/scripts/account_setting.pl; exit 0' && \
+    chmod +x idriveforlinux.bin && \
+    bash -c 'export TERM=xterm; echo -ne "\nn\n" | /idriveforlinux.bin --install; exit 0' && \
+    rm /idriveforlinux.bin && \
     ln -s /opt/IDriveForLinux/bin/idrive /etc/idrivecron
 
 # Touch IDrive crontab on volume & link it to /etc

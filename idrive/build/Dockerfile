@@ -5,7 +5,7 @@ RUN apt-get update && apt-get -y install \
       vim \
       unzip \
       curl \
-      python3 \
+      python3 && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Get IDrive

@@ -52,7 +52,8 @@ __WARNING:__ Please take a note on your schedules, as they will be deleted in th
 - Login
 - `Linux user "root" is already having an active script setup with path "/IDriveForLinux/scripts/Idrivelib/lib/dashboard.pl".
 Configuring the same user profile with current path will terminate and delete all the existing scheduled jobs. Do you want to continue (y/n)?: y`
-- Backup content and definitions will keep, but you have to recreate your schedules
+- Backup content and definitions will keep, but you have to recreate your schedules.
+- If you have set your restore location to be beneath `/IDriveForLinux` you also have to adapt this, as IDrive is now located in `/opt/IDriveForLinux`.
 
 ## Timezone
 Be advised, that the containers timezone is UTC and so are the backup times and the log entries.

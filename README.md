@@ -39,10 +39,19 @@ Now you login and specify the basic settings. For me this worked best:
 - `Enter your Backup Location` - enter a name - do no keep empty
 - `Do you want to login as ...: y` - otherwise you have to login again afterwords with `./drive --login` or `./drive --account-setting`
 
-For more information and additional ./idrive parameters have a look at the [IDrive documentation](https://www.idrive.com/readme).
+For more information and additional `./idrive` parameters have a look at the [IDrive documentation](https://www.idrive.com/readme).
 The login and settings are stored persistent in the volume.
 
 ## Backup configuration
 The configuration and operation of backup and restore can be done in the IDrive GUI. Help can be found on the [IDrive FAQs](https://www.idrive.com/faq_linux#linuxWeb2) for Linux.
 
+## Migration from IDrive version 2.x
+If you had the old version 2.x (latest was 2.38) running, you have to migrate the configuration to the new 3.x version. To do this, first you have to use the new image and then run `docker exec -it idrive ./idrive --account-setting`.
+Please take a note on your schedules, as they will be deleted in the next steps.
+- Login
+- `Linux user "root" is already having an active script setup with path "/IDriveForLinux/scripts/Idrivelib/lib/dashboard.pl".
+Configuring the same user profile with current path will terminate and delete all the existing scheduled jobs. Do you want to continue (y/n)?: y`
+- Backup content and definitions will keep, but you have to recreate your schedules
+
+## Timezone
 Be advised, that the containers timezone is UTC and so are the backup times and the log entries.

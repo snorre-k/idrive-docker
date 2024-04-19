@@ -19,7 +19,7 @@ Image is tagged `idrive-docker:latest`. The image is also available on Dockerhub
 ## Run container with docker
 ```shell
 docker volume create idrive
-docker run --rm -d --name idrive -v idrive:/opt/IDriveForLinux/idriveIt -v /path/to/backup:/source/1:ro idrive-docker:latest
+docker run --rm -d --name idrive -v idrive:/opt/IDriveForLinux/idriveIt -v /path/to/backup:/source/1:ro -e TZ="Etc/UTC" idrive-docker:latest
 ```
 Data to be backuped should be located in `/path/to/backup`. It is mapped to `/sources/1` inside the container. You can specify more mappings like this to backup different folders (e.g.: `-v /path/to/anotherbackup:/source/2`). In the IDrive backup configuration you then only have to specify `/source` as backup source.
 
@@ -56,4 +56,4 @@ Configuring the same user profile with current path will terminate and delete al
 - If you have set your restore location to be beneath `/IDriveForLinux` you also have to adapt this, as IDrive is now located in `/opt/IDriveForLinux`.
 
 ## Timezone
-Be advised, that the containers timezone is UTC and so are the backup times and the log entries.
+Be advised, that the containers timezone is UTC and so are the backup times and the log entries. Adapt the `TC` environment variable to your timezone to have local time in place.

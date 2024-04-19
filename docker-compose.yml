@@ -9,6 +9,8 @@ services:
       - idrive:/opt/IDriveForLinux/idriveIt
       - /path/to/backup:/source/1:ro
     restart: unless-stopped
+    environment:
+      - TZ=Etc/UTC
 
 volumes:
   idrive:

@@ -1,5 +1,17 @@
 #!/usr/bin/env bash
 
+# Set Timezone from $TZ environment variable
+if [ "$TZ" ]; then
+  # Check if timezone exists in /usr/share/zoneinfo folder
+  if [ -f "/usr/share/zoneinfo/$TZ" ]; then
+    # create /etc/localtime link
+    if ln -sf /usr/share/zoneinfo/$TZ /etc/localtime; then
+      dpkg-reconfigure -f noninteractive tzdata
+    fi
+  fi
+fi
+
+
 # Entrypoint for idrive
 echo "iDrive start.."
 

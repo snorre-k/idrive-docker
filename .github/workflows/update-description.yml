@@ -5,8 +5,8 @@ on:
   push:
     branches: [main]
     paths:
-      - 'README.md'
-      - '.github/workflows/update-description.yml'
+      - "README.md"
+      - ".github/workflows/update-description.yml"
 
 jobs:
   dockerHubDescription:
@@ -25,4 +25,3 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           repository: snorre0815/idrive-docker
           short-description: ${{ github.event.repository.description }}
-

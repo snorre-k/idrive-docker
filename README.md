@@ -12,9 +12,11 @@ GitHub: https://github.com/snorre-k/idrive-docker
 ```shell
 docker build -t idrive-docker:latest .
 ```
-Image is tagged `idrive-docker:latest`. The image is also available on Dockerhub and GHCR
+Image is tagged `idrive-docker:latest`. The image is also available on Dockerhub and GHCR. Thx to @araines, the image gets also tagged with the iDrive client version.
 - `snorre0815/idrive-docker:latest`
 - `ghcr.io/snorre-k/idrive-docker:latest`
+- `snorre0815/idrive-docker:version`
+- `ghcr.io/snorre-k/idrive-docker:version`
 
 ## Run container with docker
 ```shell

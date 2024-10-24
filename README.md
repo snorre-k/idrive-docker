@@ -39,8 +39,12 @@ You have to login to your IDrive account after first start.
 docker exec -it idrive ./idrive --account-setting
 ```
 Now you login and specify the basic settings. For me this worked best:
-- `Create new Backup Location`
-- `Enter your Backup Location` - enter a name - do no keep empty
+- `1) Login using IDrive credentials`
+  - `Enter your IDrive username:`
+  - `Enter your IDrive password:`
+- `1) Create new Backup Location`
+  - `Enter your Backup Location` - enter a name - do no keep empty
+- ...
 - `Do you want to login as ...: y` - otherwise you have to login again afterwords with `./drive --login` or `./drive --account-setting`
 
 For more information and additional `./idrive` parameters have a look at the [IDrive documentation](https://www.idrive.com/readme).

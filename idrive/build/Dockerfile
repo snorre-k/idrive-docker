@@ -14,7 +14,7 @@ RUN apt-get update && apt-get -y upgrade && apt-get -y install \
 # Get & Setup IDrive
 RUN curl -O https://www.idrivedownloads.com/downloads/linux/download-for-linux/linux-bin/idriveforlinux.bin && \
     chmod +x idriveforlinux.bin && \
-    bash -c 'export TERM=xterm; echo -ne "\nn\n" | /idriveforlinux.bin --install; exit 0' && \
+    bash -c 'export TERM=xterm; echo -ne "A\n" | /idriveforlinux.bin --install; exit 0' && \
     rm /idriveforlinux.bin && \
     ln -s /opt/IDriveForLinux/bin/idrive /etc/idrivecron
 

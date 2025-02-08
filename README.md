@@ -44,8 +44,6 @@ Now you login and specify the basic settings. For me this worked best:
   - `Enter your IDrive password:`
 - `1) Create new Backup Location`
   - `Enter your Backup Location` - enter a name - do no keep empty
-- ...
-- `Do you want to login as ...: y` - otherwise you have to login again afterwords with `./drive --login` or `./drive --account-setting`
 
 For more information and additional `./idrive` parameters have a look at the [IDrive documentation](https://www.idrive.com/readme).
 The login and settings are stored persistent in the volume.

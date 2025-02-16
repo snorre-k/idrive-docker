@@ -1,4 +1,4 @@
-FROM ubuntu:24.04
+FROM ubuntu:24.04 AS base
 
 # Install packages
 RUN apt-get update && apt-get -y upgrade && apt-get -y install \
@@ -32,3 +32,6 @@ VOLUME /opt/IDriveForLinux/idriveIt
 # Run the start script
 CMD ["/start.sh"]
 
+FROM base AS arm64
+
+ENV LD_LIBRARY_PATH=/opt/IDriveForLinux/bin/Idrivelib/dependencies/python/lib:$LD_LIBRARY_PATH

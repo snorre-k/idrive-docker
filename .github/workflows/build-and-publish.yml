@@ -56,7 +56,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build image and push to Docker Hub and GitHub Container Registry
+      - name: Build amd64 image and push to Docker Hub and GitHub Container Registry
         if: github.event_name == 'push' || steps.check-base.outputs.needs-updating == 'true' || steps.check-version.outputs.tag == 'not found'
         uses: docker/build-push-action@v6
         with:
@@ -70,3 +70,22 @@ jobs:
             ghcr.io/snorre-k/idrive-docker:${{ steps.version.outputs.idrive_version }}
           # build on feature branches, push only on main branch
           push: ${{ github.ref == 'refs/heads/main' }}
+          target: amd64
+          platform: linux/amd64
+
+      - name: Build aarch64 image and push to Docker Hub and GitHub Container Registry
+        if: github.event_name == 'push' || steps.check-base.outputs.needs-updating == 'true' || steps.check-version.outputs.tag == 'not found'
+        uses: docker/build-push-action@v6
+        with:
+          # relative path to the place where source code with Dockerfile is located
+          context: idrive/build
+          # Note: tags has to be all lower-case
+          tags: |
+            snorre0815/idrive-docker:latest
+            snorre0815/idrive-docker:${{ steps.version.outputs.idrive_version }}
+            ghcr.io/snorre-k/idrive-docker:latest
+            ghcr.io/snorre-k/idrive-docker:${{ steps.version.outputs.idrive_version }}
+          # build on feature branches, push only on main branch
+          push: ${{ github.ref == 'refs/heads/main' }}
+          target: arm64
+          platform: linux/arm64

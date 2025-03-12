@@ -27,10 +27,10 @@ docker run --rm -d --name idrive -v idrive:/opt/IDriveForLinux/idriveIt \
 ```
 Data to be backuped should be located in `/path/to/backup`. It is mapped to `/sources/1` inside the container. You can specify more mappings like this to backup different folders (e.g.: `-v /path/to/anotherbackup:/source/2`). In the IDrive backup configuration you then only have to specify `/source` as backup source.
 
-## Run with docker-compose - [docker-compose.yml](https://github.com/snorre-k/idrive-docker/blob/main/docker-compose.yml)
+## Build & Run with docker-compose - [docker-compose.yml](https://github.com/snorre-k/idrive-docker/blob/main/docker-compose.yml)
 ```shell
-docker-compose build idrive
-docker-compose up -d idrive
+docker compose build idrive
+docker compose up -d idrive
 ```
 
 ## Tasks after first start

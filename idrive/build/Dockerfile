@@ -2,6 +2,7 @@ FROM ubuntu:24.04
 
 # Install packages
 RUN apt-get update && apt-get -y upgrade && apt-get -y install \
+      locales-all \
       tzdata \
       vim \
       unzip \

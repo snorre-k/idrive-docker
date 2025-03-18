@@ -29,6 +29,7 @@ RUN chmod +x /start.sh
 
 WORKDIR /opt/IDriveForLinux/bin
 VOLUME /opt/IDriveForLinux/idriveIt
+ENV LC_ALL=en_US.UTF-8
 
 # Run the start script
 CMD ["/start.sh"]

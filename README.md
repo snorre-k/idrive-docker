@@ -25,7 +25,7 @@ docker run -d --name idrive -v idrive:/opt/IDriveForLinux/idriveIt \
            -v /path/to/backup:/source/1:ro -e TZ="Etc/UTC" \
            snorre0815/idrive-docker:latest
 ```
-Data to be backuped should be located in `/path/to/backup`. It is mapped to `/sources/1` inside the container. You can specify more mappings like this to backup different folders (e.g.: `-v /path/to/anotherbackup:/source/2`). In the IDrive backup configuration you then only have to specify `/source` as backup source.
+Data to be backuped should be located in `/path/to/backup`. It is mapped to `/source/1` inside the container. You can specify more mappings like this to backup different folders (e.g.: `-v /path/to/anotherbackup:/source/2`). In the IDrive backup configuration you then only have to specify `/source` as backup source.
 
 ### Optional: Run with bind mounts instead of docker volumes
 ```shell

@@ -9,6 +9,7 @@ RUN apt-get update && apt-get -y upgrade && apt-get -y install \
       curl \
       cron \
       iputils-ping \
+      iproute2 \
       python3 && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -22,6 +23,9 @@ RUN curl -O https://www.idrivedownloads.com/downloads/linux/download-for-linux/l
 # Touch IDrive crontab on volume & link it to /etc
 RUN touch /opt/IDriveForLinux/idriveIt/idrivecrontab.json && \
     ln -s /opt/IDriveForLinux/idriveIt/idrivecrontab.json /etc/idrivecrontab.json
+
+# Create a backup of /opt/IDriveForLinux/idriveIt in case a bind mount is used or binaries get corrupt or outdated
+RUN cp -a /opt/IDriveForLinux/idriveIt /opt/IDriveForLinux/idriveIt.orig
 
 # Copy start script
 COPY start.sh /

@@ -11,6 +11,8 @@ if [ "$TZ" ]; then
   fi
 fi
 
+# Copy binaries in /opt/IDriveForLinux/idriveIt.orig to original location
+cp -a /opt/IDriveForLinux/idriveIt.orig/idevsutil* /opt/IDriveForLinux/idriveIt/
 
 # Entrypoint for idrive
 echo "iDrive start.."

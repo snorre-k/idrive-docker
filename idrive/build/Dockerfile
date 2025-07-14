@@ -27,6 +27,9 @@ RUN touch /opt/IDriveForLinux/idriveIt/idrivecrontab.json && \
 # Create a backup of /opt/IDriveForLinux/idriveIt in case a bind mount is used or binaries get corrupt or outdated
 RUN cp -a /opt/IDriveForLinux/idriveIt /opt/IDriveForLinux/idriveIt.orig
 
+# Set LD_LIBRARY_PATH (needed for ARM64 image)
+ENV LD_LIBRARY_PATH="/opt/IDriveForLinux/bin/Idrivelib/dependencies/python/lib"
+
 # Copy start script
 COPY start.sh /
 RUN chmod +x /start.sh

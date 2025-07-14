@@ -70,3 +70,5 @@ jobs:
             ghcr.io/snorre-k/idrive-docker:${{ steps.version.outputs.idrive_version }}
           # build on feature branches, push only on main branch
           push: ${{ github.ref == 'refs/heads/main' }}
+          # multiarch: amd64 and arm64
+          platforms: linux/amd64,linux/arm64

@@ -1,5 +1,5 @@
 > [!WARNING]
-> Version 3.9.0 of the iDrive client does not work correctly in the container. Please use previous 3.8.0 till this is resolved.
+> Upgrading to version 3.9.0 of the iDrive client does not work correctly. Please have a look at [Issue #26](/../../issues/26)
 
 # idrive-docker
 Run IDrive Linux Client in a docker container

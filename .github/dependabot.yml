@@ -1,0 +1,33 @@
+version: 2
+
+# Third-party actions in these workflows are pinned by commit SHA (they run in
+# jobs holding DOCKERHUB_TOKEN / GITHUB_TOKEN). SHA pins never roll forward on
+# their own, so Dependabot is what surfaces new releases — it bumps the SHA and
+# keeps the trailing "# vX.Y.Z" comment on each `uses:` line in sync.
+#
+# cooldown holds a release back until it has been public for the given number of
+# days, so freshly published versions are not adopted immediately. Security
+# updates ignore cooldown and are still offered right away.
+
+updates:
+  # Actions referenced in .github/workflows/**
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    cooldown:
+      default-days: 5
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "ci"
+
+  # Base image in idrive/build/Dockerfile
+  - package-ecosystem: "docker"
+    directory: "/idrive/build"
+    schedule:
+      interval: "weekly"
+    cooldown:
+      default-days: 5
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: "build"

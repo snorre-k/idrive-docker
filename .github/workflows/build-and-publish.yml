@@ -9,6 +9,12 @@ on:
     - cron: "12 9 * * *"
   workflow_dispatch:
 
+# Serialize builds so a manual dispatch overlapping the daily schedule cannot race
+# to push :latest, with the slower run silently winning.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   build-and-push-docker-image:
     name: Build Docker image and push to repositories
@@ -31,7 +37,7 @@ jobs:
       - name: Check for new base image
         if: github.event_name != 'push'
         id: check-base
-        uses: lucacome/docker-image-update-checker@v3.1.0
+        uses: lucacome/docker-image-update-checker@3233adf42bb1dddf92f18cf024a8e202dbeaa9b3 # v3.1.0
         with:
           base-image: ubuntu:26.04
           image: snorre0815/idrive-docker:latest
@@ -39,7 +45,7 @@ jobs:
       - name: Check for new iDrive version
         if: github.event_name != 'push'
         id: check-version
-        uses: tyriis/docker-image-tag-exists@v2026.6.0
+        uses: tyriis/docker-image-tag-exists@e73c8fdfab85076cdcf2ce4b443181fae2153675 # v2026.6.0
         with:
           registry: ghcr.io
           repository: ${{ github.repository }}

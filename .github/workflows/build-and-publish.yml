@@ -37,7 +37,7 @@ jobs:
       - name: Check for new base image
         if: github.event_name != 'push'
         id: check-base
-        uses: lucacome/docker-image-update-checker@3233adf42bb1dddf92f18cf024a8e202dbeaa9b3 # v3.1.0
+        uses: lucacome/docker-image-update-checker@958e0b396cd5227e7da180826286ef48c20296f9 # v3.1.2
         with:
           base-image: ubuntu:26.04
           image: snorre0815/idrive-docker:latest

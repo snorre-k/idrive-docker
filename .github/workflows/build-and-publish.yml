@@ -93,7 +93,7 @@ jobs:
 
       - name: Build image and push to Docker Hub and GitHub Container Registry
         if: steps.should-build.outputs.build == 'true'
-        uses: docker/build-push-action@v7.2.0
+        uses: docker/build-push-action@v7.4.0
         with:
           # relative path to the place where source code with Dockerfile is located
           context: idrive/build

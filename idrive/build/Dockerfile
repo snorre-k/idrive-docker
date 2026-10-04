@@ -17,7 +17,8 @@ RUN apt-get update && apt-get -y upgrade && apt-get -y install \
       cron \
       iputils-ping \
       iproute2 \
-      python3 && \
+      python3 \
+      libpopt0 && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Get & Setup IDrive - export LD_LIBRARY_PATH for ARM installs

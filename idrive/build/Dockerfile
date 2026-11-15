@@ -1,4 +1,4 @@
-FROM ubuntu:26.04
+FROM debian:stable-slim
 
 # URL of iDrive script package with fallback URL
 ARG IDRIVE_URL=https://www.idrivedownloads.com/downloads/linux/linux-bin/idriveforlinux.bin
@@ -6,8 +6,9 @@ ARG TARGETPLATFORM
 
 
 ## Install packages & iDrive
-    # use nearest archive mirrors
-RUN sed -i 's|http://ubuntu.com|mirror://://ubuntu.com|g' /etc/apt/sources.list.d/ubuntu.sources && \
+RUN \
+#    # use nearest archive mirrors \
+#    sed -i 's|http://ubuntu.com|mirror://://ubuntu.com|g' /etc/apt/sources.list.d/ubuntu.sources && \
     # Packages & System Upgrade \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get -y upgrade && \
@@ -23,21 +24,21 @@ RUN sed -i 's|http://ubuntu.com|mirror://://ubuntu.com|g' /etc/apt/sources.list.
       iputils-ping \
       iproute2 \
       python3 \
+      procps \
       libpopt0 && \
-    # Workaround - tar=1.35+dfsg-4ubuntu0.4 is broken on Ubuntu 26.04 linux/arm64 image \
-    if [ "$TARGETPLATFORM" = "linux/arm64" ]; then \
-      DEBIAN_FRONTEND=noninteractive apt-get -y install --allow-downgrades tar=1.35+dfsg-4; \
-    fi && \
-    # Workaround - iDrive EVS binaries for ARM are compiled for 32bit armhf (which is not available on Ubuntu 26.04) --> /lib/ld-linux.so.3 missing \
-    #              Installing basic 32bit linux/armhf C Library & libpopt0 \
-    #              Then linking /lib/ld-linux-armhf.so.3 to /lib/ld-linux.so.3 \
-    if [ "$TARGETPLATFORM" = "linux/arm64" ]; then \
-      dpkg --add-architecture armhf && \
-      apt-get update && \
-      DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install libc6:armhf libpopt0:armhf && \
-      ln -s /lib/ld-linux-armhf.so.3 /lib/ld-linux.so.3; \
-    fi && \
-    
+#    # Workaround - tar=1.35+dfsg-4ubuntu0.4 is broken on Ubuntu 26.04 linux/arm64 image \
+#    if [ "$TARGETPLATFORM" = "linux/arm64" ]; then \
+#      DEBIAN_FRONTEND=noninteractive apt-get -y install --allow-downgrades tar=1.35+dfsg-4; \
+#    fi && \
+#    # Workaround - iDrive EVS binaries for ARM are compiled for 32bit armhf (which is not available on Ubuntu 26.04) --> /lib/ld-linux.so.3 missing \
+#    #              Installing basic 32bit linux/armhf C Library & libpopt0 \
+#    #              Then linking /lib/ld-linux-armhf.so.3 to /lib/ld-linux.so.3 \
+#    if [ "$TARGETPLATFORM" = "linux/arm64" ]; then \
+#      dpkg --add-architecture armhf && \
+#      apt-get update && \
+#      DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install libc6:armhf libpopt0:armhf && \
+#      ln -s /lib/ld-linux-armhf.so.3 /lib/ld-linux.so.3; \
+#    fi && \
     # Cleanup \
     DEBIAN_FRONTEND=noninteractive apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 

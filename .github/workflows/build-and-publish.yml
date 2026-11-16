@@ -45,7 +45,7 @@ jobs:
       - name: Check for new iDrive version
         if: github.event_name != 'push'
         id: check-version
-        uses: tyriis/docker-image-tag-exists@53a0dc68348ca252a240f17b46fe4e585378b257 # v2026.6.0
+        uses: tyriis/docker-image-tag-exists@1000671f47e8c85575cfccb547bbe91ed9934345 # v2026.6.0
         with:
           registry: ghcr.io
           repository: ${{ github.repository }}
